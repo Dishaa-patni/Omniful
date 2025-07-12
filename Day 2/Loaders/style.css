@@ -104,3 +104,54 @@ body {
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .spinner-box {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    gap: 30px;
+    padding: 15px;
+  }
+
+  .spinner-box {
+    width: 200px;
+    height: 200px;
+  }
+
+  .spinner1 {
+    width: 80px;
+    height: 80px;
+    border-top: 6px solid orange;
+  }
+
+  .spinner2 {
+    width: 60px;
+    height: 60px;
+  }
+
+  .spinner2 .planet {
+    width: 20px;
+    height: 20px;
+  }
+
+  .spinner3 {
+    width: 60px;
+    height: 60px;
+  }
+
+  .dots {
+    width: 12px;
+    height: 12px;
+  }
+}
