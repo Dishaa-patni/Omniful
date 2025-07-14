@@ -5,7 +5,7 @@ import { useState } from "react";
 
  const increment=()=>setCount((count)=>count+1)
  
- const decrement=()=>setCount((count)=>count-1)
+ const decrement=()=>setCount((count)=>(count>0?count-1 :0))
 
  const reset=()=>setCount(initial)
 
