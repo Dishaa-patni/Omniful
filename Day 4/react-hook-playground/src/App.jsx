@@ -3,6 +3,7 @@ import "./App.css";
 import CounterTest from "./components/CounterTest.jsx";
 import Previous from "./components/Previous.jsx";
 import Toggle from "./components/Toggle.jsx";
+import DebounceTest from "./components/DebounceTest.jsx";
 
 function App() {
   const [activeHook, setActiveHook] = useState();
@@ -11,6 +12,7 @@ function App() {
     counter: <CounterTest />,
     toggle: <Toggle />,
     // previous: <Previous />,
+    debounce:<DebounceTest/>
   };
 
   const renderComponent = componentMap[activeHook];
@@ -23,6 +25,7 @@ function App() {
         <button onClick={() => setActiveHook("counter")}>useCounter</button>
         <button onClick={() => setActiveHook("toggle")}>useToggle</button>
         {/* <button onClick={() => setActiveHook("previous")}>usePrevious</button> */}
+        <button onClick={() => setActiveHook("debounce")}>useDebounce</button>
       </div>
 
       <div className="test-area">{renderComponent}</div>
