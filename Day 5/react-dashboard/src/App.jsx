@@ -3,9 +3,10 @@ import Modal from "./components/Modal.jsx";
 import Accordion from "./components/Accordion.jsx";
 import InfiniteScroll from "./components/InfiniteScroll.jsx";
 import AutoComplete from "./components/AutoComplete.jsx";
+import "../src/App.css";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("modal");
+  const [activeTab, setActiveTab] = useState("");
 
   const renderingComponentMap = {
     modal: <Modal />,
@@ -18,16 +19,17 @@ function App() {
 
   return (
     <>
-      <div>
-        <h1>React Dashboard</h1>
+      <div className="app-container">
         <div className="tabBar">
+          <h1 className="logo">React Dashboard</h1>
+
           <button onClick={() => setActiveTab("modal")}>Modal Tab</button>
           <button onClick={() => setActiveTab("accordion")}>
             Accordian Tab
           </button>
-          <button onClick={() => setActiveTab("scroll")}>
+          {/* <button onClick={() => setActiveTab("scroll")}>
             InfiniteScroll Tab
-          </button>
+          </button> */}
           <button onClick={() => setActiveTab("autoComplete")}>
             AutoComplete Tab
           </button>
