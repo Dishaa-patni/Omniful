@@ -11,7 +11,7 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Center it */
+  transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 24px 32px;
   border-radius: 10px;
