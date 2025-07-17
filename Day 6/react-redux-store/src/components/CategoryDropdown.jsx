@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../styles/CategoryDRopdown.module.css";
+import styles from "../styles/CategoryDropdown.module.css";
 import { setCategory } from "../features/filter/filterSlice";
 
 const CategoryDropdown = () => {
