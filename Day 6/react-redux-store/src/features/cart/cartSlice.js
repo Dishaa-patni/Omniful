@@ -12,9 +12,7 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       //So we need update the quantity, not th item
-      if (productInCart) {
-        productInCart.quantity += 1;
-      } else {
+      if (!productInCart) {
         state.cartItems.push({ ...action.payload, quantity: 1 });
       }
     },
@@ -27,8 +25,32 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.cartItems = [];
     },
+
+    incrementQuantity: (state, action) => {
+      const item = state.cartItems.find((item) => item.id === action.payload);
+      if (item) {
+        item.quantity += 1;
+      }
+    },
+
+    decrementQuantity: (state, action) => {
+      const item = state.cartItems.find((item) => item.id === action.payload);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+      } else {
+        state.cartItems = state.cartItems.filter(
+          (item) => item.id != action.payload
+        );
+      }
+    },
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  clearCart,
+  incrementQuantity,
+  decrementQuantity,
+} = cartSlice.actions;
 export default cartSlice.reducer;
