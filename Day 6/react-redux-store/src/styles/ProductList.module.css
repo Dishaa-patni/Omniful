@@ -122,8 +122,7 @@
 
 @media (max-width: 768px) {
   .productGrid {
-    padding: 1rem 0;
-    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 
   .card {
@@ -162,7 +161,7 @@
 
 @media (max-width: 480px) {
   .card img {
-    height: 100px;
+    height: 200px;
   }
 
   .card h3 {
