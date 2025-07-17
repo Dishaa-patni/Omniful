@@ -5,38 +5,58 @@
 }
 .navbar {
   display: flex;
-
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #2c3e50;
+  padding: 1.2rem 2.5rem;
+  background: linear-gradient(90deg, #2563eb 60%, #1e293b 100%);
   color: white;
   position: sticky;
   top: 0;
   z-index: 999;
+  box-shadow: 0 2px 12px rgba(30, 41, 59, 0.08);
 }
 
 .logo {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   text-decoration: none;
-  color: white;
+  color: #fff;
   font-weight: bold;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+.logo:hover {
+  color: #a5b4fc;
 }
 
 .cartLink {
   text-decoration: none;
-  color: white;
+  color: #fff;
   position: relative;
+  font-size: 1.15rem;
+  font-weight: 500;
+  padding: 0.4em 1em 0.4em 2.2em;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+  background: rgba(37, 99, 235, 0.08);
+}
+.cartLink:hover {
+  background: #1d4ed8;
+  color: #fff;
 }
 
 .count {
-  background-color: red;
+  background: #ef4444;
+  color: #fff;
   border-radius: 50%;
-  font-size: 0.75rem;
-  padding: 2px 6px;
+  font-size: 0.8rem;
+  padding: 3px 8px;
   position: absolute;
-  top: -8px;
-  right: -12px;
+  left: 0.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  box-shadow: 0 1px 4px rgba(239, 68, 68, 0.15);
+  border: 2px solid #fff;
 }
 
 @media (max-width: 768px) {
@@ -53,13 +73,13 @@
 
   .cartLink {
     align-self: flex-start;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    padding: 0.4em 0.8em 0.4em 2em;
   }
 
   .count {
     font-size: 0.9rem;
-    padding: 1px 4px;
-    top: -6px;
-    right: -10px;
+    padding: 2px 6px;
+    left: 0.3em;
   }
 }

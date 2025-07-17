@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "../styles/Navbar.module.css";
-import CategoryDropdown from "./CategoryDropdown";
 
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);

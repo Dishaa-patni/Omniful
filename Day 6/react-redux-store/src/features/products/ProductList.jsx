@@ -51,49 +51,15 @@ const ProductList = () => {
               <h4>{prd.category}</h4>
               <p>₹{prd.price}</p>
 
-              {cartItem ? (
-                <div className={styles.buttonGroup}>
-                  <button
-                    onClick={() => {
-                      dispatch(decrementQuantity(prd.id));
-                      toast.info(`Decreased quantity of "${prd.title}"`);
-                    }}
-                    className={styles.iconButton}
-                  >
-                    -
-                  </button>
-                  <span className={styles.quantity}>{cartItem.quantity}</span>
-                  <button
-                    onClick={() => {
-                      dispatch(incrementQuantity(prd.id));
-                      toast.success(`Increased quantity of "${prd.title}"`);
-                    }}
-                    className={styles.iconButton}
-                  >
-                    +
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      dispatch(removeFromCart(prd.id));
-                      toast.error(`Removed "${prd.title}" from cart`);
-                    }}
-                    className={styles.iconButton}
-                  >
-                    🗑️
-                  </button>
-                </div>
-              ) : (
-                <button
-                  className={styles.addButton}
-                  onClick={() => {
-                    dispatch(addToCart(prd));
-                    toast.success(`${prd.title} added to cart`);
-                  }}
-                >
-                  Add to Cart
-                </button>
-              )}
+              <button
+                className={styles.addButton}
+                onClick={() => {
+                  dispatch(addToCart(prd));
+                  toast.success(`${prd.title} added to cart`);
+                }}
+              >
+                Add to Cart
+              </button>
             </div>
           );
         })}
