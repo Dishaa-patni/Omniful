@@ -17,7 +17,9 @@ const orderDraftSlice = createSlice({
       state.services = [];
     },
     saveStep1(state, action) {
+      //   console.log("soham jain ", state, action);
       state.step1 = action.payload;
+      //   console.log("dishaa",state.step1)
     },
     saveStep2(state, action) {
       state.step2 = action.payload;
@@ -28,10 +30,17 @@ const orderDraftSlice = createSlice({
     resetDraft(state) {
       state.step1 = null;
       state.step2 = null;
-      state.isSubmitted = false;
+      state.isSubmitted = action.payload;
     },
   },
 });
 
-export const { addService,saveStep1,saveStep2,markSubmitted,resetDraft,clearServices } = orderDraftSlice.actions;
+export const {
+  addService,
+  saveStep1,
+  saveStep2,
+  markSubmitted,
+  resetDraft,
+  clearServices,
+} = orderDraftSlice.actions;
 export default orderDraftSlice.reducer;

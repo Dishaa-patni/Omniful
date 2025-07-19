@@ -52,11 +52,18 @@ const NewOrderPage = () => {
 
   const requestedBy = watch("requestedBy");
 
+
+
+
+
   useEffect(() => {
     if (requestedBy) clearErrors("requestedBy");
   }, [requestedBy, clearErrors]);
 
   useEffect(() => {
+    // only run once when component mounts
+    if (!draft.step1 && !draft.step2 && !draft.isSubmitted) return;
+
     if (draft.isSubmitted) {
       setStep(2);
       reset({
@@ -73,12 +80,14 @@ const NewOrderPage = () => {
       reset({ requestedBy: draft.step1.requestedBy });
       setStep(1);
     }
-  }, [draft, reset]);
+  }, []); // ← run this only once on mount (remove `draft` from deps)
 
   const handleNext = async () => {
     const isValid = await trigger("requestedBy");
+    console.log(isValid);
     if (isValid) {
       dispatch(saveStep1({ requestedBy }));
+      console.log(dispatch(saveStep1({ requestedBy })));
       setStep(2);
     }
   };
@@ -291,12 +300,19 @@ const NewOrderPage = () => {
 
 export default NewOrderPage;
 
+
 // import { useForm } from "react-hook-form";
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import * as yup from "yup";
 // import { yupResolver } from "@hookform/resolvers/yup";
-// import { addService } from "../features/orderDraftSlice"; // ✅ import
+// import {
+//   addService,
+//   saveStep1,
+//   saveStep2,
+//   markSubmitted,
+//   resetDraft,
+// } from "../features/orderDraftSlice.js";
 
 // const validationSchema = yup.object().shape({
 //   requestedBy: yup.string().required("Requested By is required"),
@@ -312,8 +328,8 @@ export default NewOrderPage;
 
 // const NewOrderPage = () => {
 //   const [step, setStep] = useState(1);
-//   const [submitted, setSubmitted] = useState(false); // ✅ show/hide form
 //   const user = useSelector((state) => state.users);
+//   const draft = useSelector((state) => state.orderDraft);
 //   const dispatch = useDispatch();
 
 //   const {
@@ -342,9 +358,33 @@ export default NewOrderPage;
 //     if (requestedBy) clearErrors("requestedBy");
 //   }, [requestedBy, clearErrors]);
 
+//   useEffect(() => {
+//     if (!draft.step1 && !draft.step2 && !draft.isSubmitted) return;
+
+//     if (draft.isSubmitted) {
+//       setStep(2);
+//       reset({
+//         ...draft.step2,
+//         requestedBy: draft.step1?.requestedBy || "",
+//       });
+//     } else if (draft.step2) {
+//       reset({
+//         ...draft.step2,
+//         requestedBy: draft.step1?.requestedBy || draft.step2?.requestedBy || "",
+//       });
+//       setStep(2);
+//     } else if (draft.step1) {
+//       reset({ requestedBy: draft.step1.requestedBy });
+//       setStep(1);
+//     }
+//   }, [draft, reset]);
+
 //   const handleNext = async () => {
 //     const isValid = await trigger("requestedBy");
-//     if (isValid) setStep(2);
+//     if (isValid) {
+//       dispatch(saveStep1({ requestedBy }));
+//       setStep(2);
+//     }
 //   };
 
 //   const prevStep = () => setStep(1);
@@ -352,13 +392,39 @@ export default NewOrderPage;
 //   const onSubmit = (data) => {
 //     const fullData = { ...data, department: user.department };
 //     dispatch(addService(fullData));
-//     setSubmitted(true);
+//     dispatch(saveStep2(data));
+//     dispatch(markSubmitted(true)); // ✅ set submitted
 //   };
 
 //   const handleAddAnother = () => {
+//     dispatch(markSubmitted(false)); // ✅ reset isSubmitted
+//     dispatch(
+//       saveStep2({
+//         serviceType: "",
+//         description: "",
+//         priority: "",
+//         assignedTo: "",
+//         dueDate: "",
+//         requestedBy: draft.step1?.requestedBy || "",
+//       })
+//     );
+
+//     reset({
+//       requestedBy: draft.step1?.requestedBy || "",
+//       serviceType: "",
+//       description: "",
+//       priority: "",
+//       assignedTo: "",
+//       dueDate: "",
+//     });
+
+//     setStep(2); // ✅ go straight to step 2 again
+//   };
+
+//   const handleClear = () => {
 //     reset();
-//     setStep(2);
-//     setSubmitted(false);
+//     dispatch(resetDraft()); // ✅ Clear Redux too
+//     setStep(1);
 //   };
 
 //   return (
@@ -367,7 +433,7 @@ export default NewOrderPage;
 //         Add New Order / Service
 //       </h2>
 
-//       {submitted ? (
+//       {draft.isSubmitted ? (
 //         <div className="text-center">
 //           <p className="text-green-600 text-lg font-medium mb-4">
 //             ✅ This service is added to the final review.
@@ -419,7 +485,7 @@ export default NewOrderPage;
 
 //                 <button
 //                   type="button"
-//                   onClick={() => reset()}
+//                   onClick={handleClear}
 //                   className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md shadow cursor-pointer"
 //                 >
 //                   Clear
@@ -514,13 +580,13 @@ export default NewOrderPage;
 //                 <button
 //                   type="button"
 //                   onClick={prevStep}
-//                   className="bg-red-400 hover:bg-red-500 text-white px-6 py-2 rounded-md shadow cursor-pointer "
+//                   className="bg-red-400 hover:bg-red-500 text-white px-6 py-2 rounded-md shadow cursor-pointer"
 //                 >
 //                   Back
 //                 </button>
 //                 <button
 //                   type="button"
-//                   onClick={() => reset()}
+//                   onClick={handleClear}
 //                   className="bg-gray-400 hover:bg-gray-500 text-white px-6 py-2 rounded-md shadow cursor-pointer"
 //                 >
 //                   Clear
