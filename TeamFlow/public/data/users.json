@@ -1,0 +1,57 @@
+[
+  {
+    "id": "u001",
+    "name": "Aanya",
+    "email": "admin@company.com",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "id": "u002",
+    "name": "Ritika",
+    "email": "ritika@company.com",
+    "password": "ritika123",
+    "role": "manager",
+    "department": "marketing"
+  },
+  {
+    "id": "u003",
+    "name": "Sahil",
+    "email": "sahil@company.com",
+    "password": "sahil123",
+    "role": "manager",
+    "department": "marketing"
+  },
+  {
+    "id": "u004",
+    "name": "Kunal",
+    "email": "kunal@company.com",
+    "password": "kunal123",
+    "role": "manager",
+    "department": "it"
+  },
+  {
+    "id": "u005",
+    "name": "Megha",
+    "email": "megha@company.com",
+    "password": "megha123",
+    "role": "manager",
+    "department": "design"
+  },
+  {
+    "id": "u006",
+    "name": "Tarun",
+    "email": "tarun@company.com",
+    "password": "tarun123",
+    "role": "manager",
+    "department": "design"
+  },
+  {
+    "id": "u007",
+    "name": "Ravi",
+    "email": "ravi@company.com",
+    "password": "ravi123",
+    "role": "manager",
+    "department": "it"
+  }
+]
