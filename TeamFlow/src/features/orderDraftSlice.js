@@ -24,8 +24,8 @@ const orderDraftSlice = createSlice({
     saveStep2(state, action) {
       state.step2 = action.payload;
     },
-    markSubmitted(state) {
-      state.isSubmitted = true;
+    markSubmitted(state, action) {
+      state.isSubmitted = action.payload;
     },
     resetDraft(state) {
       state.step1 = null;

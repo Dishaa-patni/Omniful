@@ -98,10 +98,11 @@ const NewOrderPage = () => {
     const fullData = { ...data, department: user.department };
     dispatch(addService(fullData));
     dispatch(saveStep2(data));
-    dispatch(markSubmitted());
+    dispatch(markSubmitted(true));
   };
 
   const handleAddAnother = () => {
+    dispatch(markSubmitted(false))
     reset({
       requestedBy: draft.step1?.requestedBy || "",
       serviceType: "",
