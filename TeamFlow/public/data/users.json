@@ -53,5 +53,13 @@
     "password": "ravi123",
     "role": "manager",
     "department": "it"
+  },
+  {
+    "id": "u008",
+    "name": "dishaa",
+    "email": "dishaa@company.com",
+    "password": "dishaa123",
+    "role": "employee",
+    "department": "it"
   }
 ]

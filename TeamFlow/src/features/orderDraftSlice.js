@@ -1,4 +1,3 @@
-// features/orderDraftSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const orderDraftSlice = createSlice({
@@ -8,6 +7,7 @@ const orderDraftSlice = createSlice({
     step1: null,
     step2: null,
     isSubmitted: false,
+    step: 1,
   },
   reducers: {
     addService(state, action) {
@@ -17,9 +17,7 @@ const orderDraftSlice = createSlice({
       state.services = [];
     },
     saveStep1(state, action) {
-      //   console.log("soham jain ", state, action);
       state.step1 = action.payload;
-      //   console.log("dishaa",state.step1)
     },
     saveStep2(state, action) {
       state.step2 = action.payload;
@@ -30,7 +28,12 @@ const orderDraftSlice = createSlice({
     resetDraft(state) {
       state.step1 = null;
       state.step2 = null;
-      state.isSubmitted = action.payload;
+    },
+    clearSubmission(state) {
+      state.isSubmitted = false;
+    },
+    setStep(state, action) {
+      state.step = action.payload;
     },
   },
 });
@@ -42,5 +45,7 @@ export const {
   markSubmitted,
   resetDraft,
   clearServices,
+  clearSubmission,
+  setStep,
 } = orderDraftSlice.actions;
 export default orderDraftSlice.reducer;

@@ -32,6 +32,7 @@ const userSlice = createSlice({
       state.password = "";
       state.department = "";
       state.isloggedIn = false;
+      localStorage.removeItem("user")
     },
   },
 });

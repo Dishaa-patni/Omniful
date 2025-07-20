@@ -1,0 +1,30 @@
+{
+  "orders": [
+    {
+      "id": "1753007133312-c3bmpg",
+      "requestedBy": "Ravi",
+      "serviceType": "it-support",
+      "description": "Hardware Support- 2 Laptops , Printer setup \nSofware support-Licence renewal for adobe",
+      "priority": "low",
+      "assignedTo": "dishaa , Vidhi",
+      "dueDate": "2025-07-11",
+      "department": "it",
+      "status": "approved",
+      "sentToAdmin": true
+    }
+  ],
+  "adminInbox": [
+    {
+      "id": "admin-1753012342800-bax5nx",
+      "requestedBy": "Ravi",
+      "serviceType": "it-support",
+      "description": "Hardware Support- 2 Laptops , Printer setup \nSofware support-Licence renewal for adobe",
+      "priority": "low",
+      "assignedTo": "dishaa , Vidhi",
+      "dueDate": "2025-07-11",
+      "department": "it",
+      "status": "approved",
+      "sentToAdmin": true
+    }
+  ]
+}

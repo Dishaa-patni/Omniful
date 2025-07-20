@@ -1,176 +1,3 @@
-// import { useEffect, useState } from "react";
-// import { useForm } from "react-hook-form";
-// import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { login } from "../features/userSlice";
-
-// const LoginPage = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     watch,
-//     setError,
-//     formState: { errors },
-//   } = useForm();
-
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const [users, setUsers] = useState([]);
-
-//   const selectedRole = watch("role");
-
-//   useEffect(() => {
-//     fetch("/data/users.json")
-//       .then((res) => res.json())
-//       .then((data) => setUsers(data));
-//   }, []);
-
-//   const onSubmit = (formData) => {
-//     const { email, role, department } = formData;
-
-//     const matchedUser = users.find((user) => {
-//       return (
-//         user.email.toLowerCase() === email.toLowerCase() &&
-//         user.role.toLowerCase() === role.toLowerCase() &&
-//         (role === "admin" ||
-//           user.department.toLowerCase() === department.toLowerCase())
-//       );
-//     });
-
-//     if (!matchedUser) {
-//       setError("email", {
-//         type: "manual",
-//         message: "❌ Invalid credentials or unauthorized access.",
-//       });
-//       return;
-//     }
-//     if (matchedUser.role !== role.toLowerCase()) {
-//       setError("email", {
-//         type: "manual",
-//         message: "❌ You are not authorized to access the " + role + " panel.",
-//       });
-//       return;
-//     }
-//     console.log("Submitting login with form data:", formData);
-//     console.log("Matched user:", matchedUser);
-
-//     dispatch(login(matchedUser));
-//     localStorage.setItem("user", JSON.stringify(matchedUser));
-
-//     dispatch(login(matchedUser));
-//     console.log("Dispatched login to Redux with:", matchedUser);
-
-//     navigate(
-//       matchedUser.role === "admin" ? "/dashboard" : "/manager-dashboard"
-//     );
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-//       <form
-//         onSubmit={handleSubmit(onSubmit)}
-//         className="bg-white p-8 rounded shadow-md w-96"
-//       >
-//         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-
-//         {errors.email?.type === "manual" && (
-//           <p className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 mb-4 rounded">
-//             {errors.email.message}
-//           </p>
-//         )}
-
-//         <div className="mb-4">
-//           <label className="block mb-1 font-medium">Role</label>
-//           <select
-//             {...register("role", { required: true })}
-//             className="w-full border rounded px-3 py-2"
-//           >
-//             <option value="">Select Role</option>
-//             <option value="admin">Admin</option>
-//             <option value="manager">Manager</option>
-//           </select>
-//           {errors.role && (
-//             <p className="text-red-500 text-sm mt-1">Role is required</p>
-//           )}
-//         </div>
-
-//         {selectedRole === "manager" && (
-//           <div className="mb-4">
-//             <label className="block mb-1 font-medium">Department</label>
-//             <select
-//               {...register("department", { required: true })}
-//               className="w-full border rounded px-3 py-2"
-//             >
-//               <option value="">Select Department</option>
-//               <option value="marketing">Marketing</option>
-//               <option value="it">IT</option>
-//               <option value="design">Design</option>
-//             </select>
-//             {errors.department && (
-//               <p className="text-red-500 text-sm mt-1">
-//                 Department is required
-//               </p>
-//             )}
-//           </div>
-//         )}
-
-//         <div className="mb-4">
-//           <label className="block mb-1 font-medium">Email</label>
-//           <input
-//             type="email"
-//             {...register("email", {
-//               required: "Emaill is required",
-//               pattern: {
-//                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/,
-//                 message: "Please enter a valid email ending with .com",
-//               },
-//             })}
-//             className="w-full border rounded px-3 py-2"
-//             placeholder="Enter your email"
-//           />
-//           {errors.email?.type === "required" && (
-//             <p className="text-red-500 text-sm mt-1">Email is required</p>
-//           )}
-//         </div>
-
-//         <div className="mb-4">
-//           <label className="block mb-1 font-medium">Password</label>
-//           <input
-//             type="password"
-//             {...register("password", {
-//               required: "Password is required",
-//               minLength: {
-//                 value: 6,
-//                 message: "Password must be at least 6 characters",
-//               },
-//               pattern: {
-//                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-//                 message: "Must contain letters and numbers",
-//               },
-//             })}
-//             className="w-full border rounded px-3 py-2"
-//             placeholder="Enter your email"
-//           />
-//           {errors.password && (
-//             <p className="text-red-500 text-sm mt-1">
-//               {errors.password.message}
-//             </p>
-//           )}
-//         </div>
-
-//         <button
-//           type="submit"
-//           className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-//         >
-//           Login
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default LoginPage;
-
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -205,7 +32,7 @@ const LoginPage = () => {
 
   const onSubmit = (formData) => {
     console.log("Form submitted ", formData);
-    const { email, role, password, department } = formData;
+    const { email, password, department } = formData;
 
     const matchedUser = users.find(
       (user) => user.email.toLowerCase() === email.toLowerCase()
@@ -219,8 +46,8 @@ const LoginPage = () => {
       return;
     }
 
-    if (role === "manager") {
-      if (matchedUser.role !== "manager") {
+    if (role === "manager" || role === "employee") {
+      if (matchedUser.role !== "manager" && matchedUser.role !== "employee") {
         setError("email", {
           type: "manual",
           message: "You don't have access",
@@ -231,7 +58,7 @@ const LoginPage = () => {
       if (matchedUser.department?.toLowerCase() !== department?.toLowerCase()) {
         setError("email", {
           type: "manual",
-          message: "Invalid credentials",
+          message: "You dont have access",
         });
         return;
       }
@@ -256,15 +83,21 @@ const LoginPage = () => {
     dispatch(login(matchedUser));
     localStorage.setItem("user", JSON.stringify(matchedUser));
     navigate(
-      matchedUser.role === "admin" ? "/dashboard" : "/manager-dashboard"
+      matchedUser.role === "admin" ? "/admin-dashboard" : "/manager-dashboard"
     );
   };
 
   return (
-    <div className="min-h-screen bg-orange-50 flex flex-col items-center justify-center p-4">
-      <div className="flex w-full max-w-md bg-slate-100 rounded-lg shadow-md mb-4 p-3">
+    <div className="min-h-screen bg-orange-50 flex flex-col items-center justify-center px-4 py-8">
+      <div className="bg-orange-50 py-6 flex flex-col items-center space-y-2 text-center">
+        <h1 className="text-xl sm:text-2xl font-bold text-orange-700 w-fit">
+          <span className="line-1">Welcome to TeamFlow 🚀</span>
+        </h1>
+      </div>
+
+      <div className="flex w-full max-w-md bg-slate-100 rounded-lg shadow mb-6 p-2 sm:p-3 gap-2">
         <button
-          className={`flex-1 flex items-center justify-center gap-2 p-2 rounded-md font-medium transition cursor-pointer ${
+          className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-sm sm:text-base font-medium transition cursor-pointer ${
             role === "admin"
               ? "bg-white text-orange-500 shadow"
               : "text-gray-500"
@@ -272,28 +105,31 @@ const LoginPage = () => {
           onClick={() => handleRoleChange("admin")}
           type="button"
         >
-          <FaUser /> Admin
+          <FaUser className="text-base sm:text-lg" /> Admin
         </button>
 
         <button
-          className={`flex-1 flex items-center justify-center gap-2 p-2 rounded-md font-medium transition cursor-pointer ${
+          className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-sm sm:text-base font-medium transition cursor-pointer ${
             role === "manager"
               ? "bg-white text-orange-500 shadow"
               : "text-gray-500"
           }`}
-          onClick={() => handleRoleChange("manager")}
+          onClick={() => handleRoleChange("manager" || "employee")}
           type="button"
         >
-          Manager
+          <FaUser className="text-base sm:text-lg" /> Employee
         </button>
       </div>
 
-      <div className="bg-white p-6 rounded-b-xl shadow-md w-full max-w-md">
-        <h2 className="text-xl font-semibold text-center mb-2">
-          {role === "admin" ? "Admin Login" : "Manager Login"}
+      <div className="bg-white w-full max-w-md rounded-lg shadow-md px-4 py-6 sm:px-6 sm:py-8">
+        <h2 className="text-lg sm:text-xl font-semibold text-center mb-4">
+          {role === "admin" ? "Admin Login" : "Employee Login"}
         </h2>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-5 text-sm sm:text-base"
+        >
           {errors.email?.message && (
             <p className="bg-red-100 text-red-700 border border-red-300 p-2 rounded text-sm">
               {errors.email.message}
@@ -302,9 +138,7 @@ const LoginPage = () => {
 
           {role === "manager" && (
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Department
-              </label>
+              <label className="block font-medium mb-1">Department</label>
               <select
                 {...register("department", {
                   required: "Department is required",
@@ -325,7 +159,7 @@ const LoginPage = () => {
           )}
 
           <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+            <label className="block font-medium mb-1">Email</label>
             <input
               type="email"
               {...register("email", {
@@ -346,7 +180,7 @@ const LoginPage = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
+            <label className="block font-medium mb-1">Password</label>
             <input
               type="password"
               {...register("password", {
@@ -368,7 +202,7 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition cursor-pointer"
+            className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition text-sm sm:text-base cursor-pointer"
           >
             Login
           </button>

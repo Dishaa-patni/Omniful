@@ -4,14 +4,23 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import {store} from "../src/store/store.js"
+import { store } from "../src/store/store.js";
+import { AbilityBuilder } from "@casl/ability";
+import { AbilityProvider } from "./utility/AbilityContext.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <AbilityProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </AbilityProvider>
+      </QueryClientProvider>
     </Provider>
   </StrictMode>
 );
