@@ -10,7 +10,7 @@ const DashboardPage = () => {
   } = useQuery({
     queryKey: ["adminInbox"],
     queryFn: () =>
-      axios.get("http://localhost:3001/adminInbox").then((res) => res.data),
+      axios.get("https://json-server-8ch8.onrender.com/adminInbox").then((res) => res.data),
   });
 
   const totalOrdersRecieved = adminOrders.length;
