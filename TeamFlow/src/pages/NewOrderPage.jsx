@@ -163,12 +163,20 @@ const NewOrderPage = () => {
                 <label className="block mb-1 font-medium">Service Type</label>
                 <select
                   {...register("serviceType")}
-                  className="border px-4 py-2 w-full rounded-md shadow-sm"
+                  className="border px-4 py-2 w-full rounded-md shadow-sm cursor-pointer"
                 >
                   <option value="">Select Service</option>
                   <option value="it-support">IT Support</option>
                   <option value="design-task">Design Task</option>
                   <option value="campaign-request">Campaign Request</option>
+                  <option value="marketing-support">Marketing Support</option>
+                  <option value="software-access">
+                    Software Access Request
+                  </option>
+                  <option value="hardware-replacement">
+                    Hardware Replacement
+                  </option>
+                  <option value="network-issue">Network / Wi-Fi Issue</option>
                 </select>
                 {errors.serviceType && (
                   <p className="text-red-500 text-sm mt-1">
