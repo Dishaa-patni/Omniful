@@ -22,7 +22,7 @@ const ManagerFinalReviewPage = () => {
   } = useQuery({
     queryKey: ["orders"],
     queryFn: () =>
-      axios.get("http://localhost:3001/orders").then((res) => res.data),
+      axios.get("https://json-server-8ch8.onrender.com/orders").then((res) => res.data),
   });
   console.log(orders);
 
@@ -54,7 +54,7 @@ const ManagerFinalReviewPage = () => {
   //put->for updation even if 1 value is changed we need to send complete data so instead we can use patch
   const sendToAdminMutation = useMutation({
     mutationFn: async (order) => {
-      await axios.patch(`http://localhost:3001/orders/${order.id}`, {
+      await axios.patch(`https://json-server-8ch8.onrender.com/orders/${order.id}`, {
         sentToAdmin: true,
         status: "pending",
       });
@@ -70,7 +70,7 @@ const ManagerFinalReviewPage = () => {
         status: "pending",
       };
 
-      await axios.post(`http://localhost:3001/adminInbox`, adminInboxOrder);
+      await axios.post(`https://json-server-8ch8.onrender.com/adminInbox`, adminInboxOrder);
     },
 
     //rather than manually updating everytime the cache orders we can do this - it will refresh with new orders
@@ -85,7 +85,7 @@ const ManagerFinalReviewPage = () => {
 
   const updateOrderStatusMutation = useMutation({
     mutationFn: ({ orderId, status }) =>
-      axios.patch(`http://localhost:3001/orders/${orderId}`, { status }),
+      axios.patch(`https://json-server-8ch8.onrender.com/orders/${orderId}`, { status }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
@@ -93,7 +93,7 @@ const ManagerFinalReviewPage = () => {
 
   const deleteOrderMutation = useMutation({
     mutationFn: (orderId) =>
-      axios.delete(`http://localhost:3001/orders/${orderId}`),
+      axios.delete(`https://json-server-8ch8.onrender.com/orders/${orderId}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
       setDeleteConfirmId(null);
@@ -102,7 +102,7 @@ const ManagerFinalReviewPage = () => {
 
   const editOrderMutation = useMutation({
     mutationFn: ({ orderId, editForm }) =>
-      axios.patch(`http://localhost:3001/orders/${orderId}`, editForm),
+      axios.patch(`https://json-server-8ch8.onrender.com/orders/${orderId}`, editForm),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
       setEditingOrderId(null);
