@@ -5,7 +5,7 @@ import { useAbility } from "../utility/AbilityContext.jsx";
 import axios from "axios";
 
 const PRIORITY_OPTIONS = ["low", "medium", "high"];
-const SERVICE_TYPE_OPTIONS = ["it-support", "design-task", "campaign-request"];
+const SERVICE_TYPE_OPTIONS = ["it-support", "design-task", "campaign-request","marketing-support","software-access","network-issue","hardware-replacement"];
 
 const ManagerFinalReviewPage = () => {
   const user = useSelector((state) => state.users);
@@ -341,7 +341,7 @@ const ManagerFinalReviewPage = () => {
                               className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm flex items-center gap-1 cursor-pointer"
                               disabled={sendToAdminMutation.isPending}
                             >
-                              ? Send to Admin
+                              📩 Send to Admin
                             </button>
                           )}
                           {ability.can("update", "Order") && (
@@ -351,7 +351,7 @@ const ManagerFinalReviewPage = () => {
                               onClick={(e) => handleEditClick(order, e)}
                               className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm flex items-center gap-1 cursor-pointer"
                             >
-                              ?? Edit
+                              Edit
                             </button>
                           )}
                           {ability.can("delete", "Order") && (
@@ -362,7 +362,7 @@ const ManagerFinalReviewPage = () => {
                               className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm flex items-center gap-1 cursor-pointer"
                               disabled={deleteOrderMutation.isPending}
                             >
-                              ?? Delete
+                               Delete
                             </button>
                           )}
                           {deleteConfirmId === order.id && (

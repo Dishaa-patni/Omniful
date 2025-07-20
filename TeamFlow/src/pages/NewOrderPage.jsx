@@ -85,7 +85,6 @@ const NewOrderPage = () => {
 
     //to send it to json server
     await addOrderMutation.mutateAsync(fullData);
-    console.log(addOrderMutation.mutateAsync(fullData));
 
     reset();
   };
