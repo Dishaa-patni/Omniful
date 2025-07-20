@@ -87,6 +87,7 @@ const NewOrderPage = () => {
     await addOrderMutation.mutateAsync(fullData);
 
     reset();
+    setStepRedux(1);
   };
 
   const handleClear = () => {
@@ -264,8 +265,9 @@ const NewOrderPage = () => {
                 <button
                   type="submit"
                   className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md shadow cursor-pointer"
+                  disabled={addOrderMutation.isLoading}
                 >
-                  Submit
+                  {addOrderMutation.isLoading ? "Submitting...." : "Submit"}
                 </button>
               </div>
             </div>
