@@ -9,6 +9,8 @@ import ManagerDashboard from "./pages/ManagerDashboard";
 import ManagerFinalReviewPage from "./pages/ManagerFinalReviewPage";
 import HistoryPage from "./pages/HistoryPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RoleBasedRedirect = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -26,68 +28,80 @@ const RoleBasedRedirect = () => {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<RoleBasedRedirect />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route element={<MainLayout />}>
-        <Route
-          path="/admin-dashboard"
-          element={
-            <ProtectedRoute resource="Dashboard" action="read">
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/orders"
-          element={
-            <ProtectedRoute resource="Order" action="read">
-              <OrderPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/setting"
-          element={
-            <ProtectedRoute resource="Settings" action="manage">
-              <SettingPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/manager-dashboard"
-          element={
-            <ProtectedRoute resource="ManagerDashboard" action="read">
-              <ManagerDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/new-order"
-          element={
-            <ProtectedRoute resource="Order" action="create">
-              <NewOrderPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/final-review"
-          element={
-            <ProtectedRoute resource="FinalReview" action="read">
-              <ManagerFinalReviewPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/history"
-          element={
-            <ProtectedRoute resource="History" action="read">
-              <HistoryPage />
-            </ProtectedRoute>
-          }
-        />
-      </Route>
-    </Routes>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Routes>
+        <Route path="/" element={<RoleBasedRedirect />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route element={<MainLayout />}>
+          <Route
+            path="/admin-dashboard"
+            element={
+              <ProtectedRoute resource="Dashboard" action="read">
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute resource="Order" action="read">
+                <OrderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/setting"
+            element={
+              <ProtectedRoute resource="Settings" action="manage">
+                <SettingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/manager-dashboard"
+            element={
+              <ProtectedRoute resource="ManagerDashboard" action="read">
+                <ManagerDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/new-order"
+            element={
+              <ProtectedRoute resource="Order" action="create">
+                <NewOrderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/final-review"
+            element={
+              <ProtectedRoute resource="FinalReview" action="read">
+                <ManagerFinalReviewPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <ProtectedRoute resource="History" action="read">
+                <HistoryPage />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

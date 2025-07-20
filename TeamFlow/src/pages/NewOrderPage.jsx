@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { saveStep1, setStep } from "../features/orderDraftSlice";
+import { showErrorToast, showSuccessToast } from "../utility/Toast";
 
 const validationSchema = yup.object().shape({
   requestedBy: yup.string().required("Requested By is required"),
@@ -82,12 +83,15 @@ const NewOrderPage = () => {
       status: "pending",
       sentToAdmin: false,
     };
-
-    //to send it to json server
-    await addOrderMutation.mutateAsync(fullData);
-
-    reset();
-    setStepRedux(1);
+    try {
+      //to send it to json server
+      await addOrderMutation.mutateAsync(fullData);
+      showSuccessToast("Form Submitted Successfully");
+      reset();
+      setStepRedux(1);
+    } catch (error) {
+      showErrorToast("Failed to Submit the form");
+    }
   };
 
   const handleClear = () => {

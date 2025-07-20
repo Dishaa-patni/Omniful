@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  shouldThrowError,
+} from "@tanstack/react-query";
 import { useAbility } from "../utility/AbilityContext.jsx";
+import { showErrorToast, showSuccessToast } from "../utility/Toast.js";
 import axios from "axios";
 
 const PRIORITY_OPTIONS = ["low", "medium", "high"];
-const SERVICE_TYPE_OPTIONS = ["it-support", "design-task", "campaign-request","marketing-support","software-access","network-issue","hardware-replacement"];
+const SERVICE_TYPE_OPTIONS = [
+  "it-support",
+  "design-task",
+  "campaign-request",
+  "marketing-support",
+  "software-access",
+  "network-issue",
+  "hardware-replacement",
+];
 
 const ManagerFinalReviewPage = () => {
   const user = useSelector((state) => state.users);
@@ -22,7 +36,9 @@ const ManagerFinalReviewPage = () => {
   } = useQuery({
     queryKey: ["orders"],
     queryFn: () =>
-      axios.get("https://json-server-8ch8.onrender.com/orders").then((res) => res.data),
+      axios
+        .get("https://json-server-8ch8.onrender.com/orders")
+        .then((res) => res.data),
   });
   console.log(orders);
 
@@ -49,15 +65,18 @@ const ManagerFinalReviewPage = () => {
 
     return false;
   });
-  
-   const sortedMySubmittedOrders = [...reviewOrders].reverse();
+
+  const sortedMySubmittedOrders = [...reviewOrders].reverse();
   //put->for updation even if 1 value is changed we need to send complete data so instead we can use patch
   const sendToAdminMutation = useMutation({
     mutationFn: async (order) => {
-      await axios.patch(`https://json-server-8ch8.onrender.com/orders/${order.id}`, {
-        sentToAdmin: true,
-        status: "pending",
-      });
+      await axios.patch(
+        `https://json-server-8ch8.onrender.com/orders/${order.id}`,
+        {
+          sentToAdmin: true,
+          status: "pending",
+        }
+      );
 
       const timestamp = Date.now();
       const randomString = Math.random().toString(36).substring(2, 8);
@@ -70,24 +89,37 @@ const ManagerFinalReviewPage = () => {
         status: "pending",
       };
 
-      await axios.post(`https://json-server-8ch8.onrender.com/adminInbox`, adminInboxOrder);
+      await axios.post(
+        `https://json-server-8ch8.onrender.com/adminInbox`,
+        adminInboxOrder
+      );
     },
 
     //rather than manually updating everytime the cache orders we can do this - it will refresh with new orders
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
+
       queryClient.invalidateQueries({ queryKey: ["adminInbox"] });
+      showSuccessToast("Sent to Admin Sucessfully");
     },
     onError: (error) => {
       console.error("Error sending to admin:", error);
+      showErrorToast("Failed to send to Admin");
     },
   });
 
   const updateOrderStatusMutation = useMutation({
     mutationFn: ({ orderId, status }) =>
-      axios.patch(`https://json-server-8ch8.onrender.com/orders/${orderId}`, { status }),
+      axios.patch(`https://json-server-8ch8.onrender.com/orders/${orderId}`, {
+        status,
+      }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
+      showSuccessToast("Status Updated Successfully");
+    },
+    onError: (error) => {
+      console.error("Error sending to admin:", error);
+      showErrorToast("Failed to update status");
     },
   });
 
@@ -96,17 +128,30 @@ const ManagerFinalReviewPage = () => {
       axios.delete(`https://json-server-8ch8.onrender.com/orders/${orderId}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
+      showSuccessToast("Order Deleted successfully");
       setDeleteConfirmId(null);
+    },
+    onError: (error) => {
+      console.error("Error sending to admin:", error);
+      showErrorToast("Failed to delete order");
     },
   });
 
   const editOrderMutation = useMutation({
     mutationFn: ({ orderId, editForm }) =>
-      axios.patch(`https://json-server-8ch8.onrender.com/orders/${orderId}`, editForm),
+      axios.patch(
+        `https://json-server-8ch8.onrender.com/orders/${orderId}`,
+        editForm
+      ),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
+      showSuccessToast("Order Edited Successfully");
+
       setEditingOrderId(null);
       setEditForm({});
+    },
+    onError: (error) => {
+      showErrorToast("Failed to Edit order ");
     },
   });
 
@@ -363,7 +408,7 @@ const ManagerFinalReviewPage = () => {
                               className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm flex items-center gap-1 cursor-pointer"
                               disabled={deleteOrderMutation.isPending}
                             >
-                               Delete
+                              Delete
                             </button>
                           )}
                           {deleteConfirmId === order.id && (

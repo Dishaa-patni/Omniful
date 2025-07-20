@@ -3,6 +3,7 @@ import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useAbility } from "../utility/AbilityContext.jsx";
 import { logout } from "../features/userSlice";
 import { useState } from "react";
+import { showSuccessToast } from "../utility/Toast.js";
 
 import {
   LayoutDashboard,
@@ -25,6 +26,7 @@ const MainLayout = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    showSuccessToast("Logout Successfully")
     navigate("/login");
   };
 

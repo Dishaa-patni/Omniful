@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { showErrorToast, showSuccessToast } from "../utility/Toast";
 
 const getStatusBadge = (status) => {
   const statusColors = {
@@ -69,6 +70,7 @@ const OrderPage = () => {
       );
       queryClient.invalidateQueries(["adminInbox"]);
       queryClient.invalidateQueries(["orders"]);
+      
     },
     onError: (error, variables) => {
       console.error(
@@ -84,12 +86,14 @@ const OrderPage = () => {
     e?.preventDefault();
     console.log("Approving order:", orderId);
     updateOrderStatus.mutate({ orderId, status: "approved" });
+    showSuccessToast("Order Approved")
   };
 
   const handleReject = (orderId, e) => {
     e?.preventDefault();
     console.log("Rejecting order:", orderId);
     updateOrderStatus.mutate({ orderId, status: "rejected" });
+    showErrorToast("Order Rejected")
   };
 
   return (

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../features/userSlice";
 import { FaUser } from "react-icons/fa";
+import { showErrorToast, showSuccessToast } from "../utility/Toast";
 
 const LoginPage = () => {
   const {
@@ -43,6 +44,7 @@ const LoginPage = () => {
         type: "manual",
         message: "Invalid credentials",
       });
+
       return;
     }
 
@@ -82,6 +84,7 @@ const LoginPage = () => {
 
     dispatch(login(matchedUser));
     localStorage.setItem("user", JSON.stringify(matchedUser));
+    showSuccessToast("Login Successfully");
     navigate(
       matchedUser.role === "admin" ? "/admin-dashboard" : "/manager-dashboard"
     );
