@@ -29,7 +29,7 @@ const ManagerDashboard = () => {
   } = useQuery({
     queryKey: ["orders"],
     queryFn: () =>
-      axios.get("http://localhost:3001/orders").then((res) => res.data),
+      axios.get("https://json-server-8ch8.onrender.com/orders").then((res) => res.data),
   });
 
   const approvedOrders = orders.filter(
