@@ -50,7 +50,7 @@ const NewOrderPage = () => {
 
   const addOrderMutation = useMutation({
     mutationFn: (orderData) =>
-      axios.post("http://localhost:3001/orders", orderData),
+      axios.post("https://json-server-8ch8.onrender.com/orders", orderData),
   });
 
   useEffect(() => {
