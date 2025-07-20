@@ -22,7 +22,7 @@
       "dueDate": "2025-07-09",
       "department": "it",
       "status": "pending",
-      "sentToAdmin": false
+      "sentToAdmin": true
     },
     {
       "id": "1753019431818-xrg8v3",
@@ -32,6 +32,30 @@
       "priority": "high",
       "assignedTo": "dihaaa",
       "dueDate": "2025-07-10",
+      "department": "it",
+      "status": "pending",
+      "sentToAdmin": true
+    },
+    {
+      "id": "1753020401282-i33zqp",
+      "requestedBy": "ravi",
+      "serviceType": "network-issue",
+      "description": "vvvvvvvvvvvvvvvvvvvvvvvv",
+      "priority": "low",
+      "assignedTo": "soham",
+      "dueDate": "2025-07-04",
+      "department": "it",
+      "status": "pending",
+      "sentToAdmin": false
+    },
+    {
+      "id": "1753020419862-k04dw5",
+      "requestedBy": "ravi",
+      "serviceType": "design-task",
+      "description": "bbbbbbbbbbbbbbbbbbbbbbb",
+      "priority": "high",
+      "assignedTo": "Smith",
+      "dueDate": "2025-07-30",
       "department": "it",
       "status": "pending",
       "sentToAdmin": false
@@ -48,6 +72,30 @@
       "dueDate": "2025-07-11",
       "department": "it",
       "status": "approved",
+      "sentToAdmin": true
+    },
+    {
+      "id": "admin-1753020227737-8duw57",
+      "requestedBy": "Ravi",
+      "serviceType": "hardware-replacement",
+      "description": "mmmmmmmmmmmmmmmmmmmmmmmm",
+      "priority": "low",
+      "assignedTo": "soham",
+      "dueDate": "2025-07-09",
+      "department": "it",
+      "status": "pending",
+      "sentToAdmin": true
+    },
+    {
+      "id": "admin-1753020230121-8ngj36",
+      "requestedBy": "Ravi",
+      "serviceType": "campaign-request",
+      "description": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "priority": "high",
+      "assignedTo": "dihaaa",
+      "dueDate": "2025-07-10",
+      "department": "it",
+      "status": "pending",
       "sentToAdmin": true
     }
   ]

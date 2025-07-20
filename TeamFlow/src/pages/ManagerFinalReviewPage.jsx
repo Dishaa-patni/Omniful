@@ -49,7 +49,8 @@ const ManagerFinalReviewPage = () => {
 
     return false;
   });
-
+  
+   const sortedMySubmittedOrders = [...reviewOrders].reverse();
   //put->for updation even if 1 value is changed we need to send complete data so instead we can use patch
   const sendToAdminMutation = useMutation({
     mutationFn: async (order) => {
@@ -187,7 +188,7 @@ const ManagerFinalReviewPage = () => {
         Final Review Table
       </h2>
 
-      {reviewOrders.length === 0 ? (
+      {sortedMySubmittedOrders.length === 0 ? (
         <p className="text-gray-600">No orders found.</p>
       ) : (
         <div className="overflow-x-auto">
@@ -206,7 +207,7 @@ const ManagerFinalReviewPage = () => {
               </tr>
             </thead>
             <tbody>
-              {reviewOrders.map((order, index) => (
+              {sortedMySubmittedOrders.map((order, index) => (
                 <tr
                   key={order.id || index}
                   className={`hover:bg-gray-50 ${

@@ -55,6 +55,7 @@ const HistoryPage = () => {
     return false;
   });
 
+  const sortedMySentOrders = [...mySentOrders].reverse();
   const getPageTitle = () => {
     if (user.role === "admin") {
       return "All Sent Requests History";
@@ -71,7 +72,7 @@ const HistoryPage = () => {
       <h2 className="text-3xl font-bold mb-6 text-orange-600">
         {getPageTitle()}
       </h2>
-      
+
       <div className="mb-4 p-4 bg-blue-50 rounded border-l-4 border-blue-400">
         <p className="text-sm text-blue-800">
           {user.role === "admin" &&
@@ -114,7 +115,7 @@ const HistoryPage = () => {
               </tr>
             </thead>
             <tbody>
-              {mySentOrders.map((order, idx) => (
+              {sortedMySentOrders.map((order, idx) => (
                 <tr
                   key={order.id || idx}
                   className={idx % 2 === 0 ? "bg-gray-50" : "bg-white"}
