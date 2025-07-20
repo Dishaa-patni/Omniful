@@ -29,21 +29,21 @@ const OrderPage = () => {
   } = useQuery({
     queryKey: ["adminInbox"],
     queryFn: () =>
-      axios.get("http://localhost:3001/adminInbox").then((res) => res.data),
+      axios.get("https://json-server-8ch8.onrender.com/adminInbox").then((res) => res.data),
   });
 
   const updateOrderStatus = useMutation({
     mutationFn: async ({ orderId, status }) => {
       console.log("Updating order:", orderId, "to status:", status);
 
-      await axios.patch(`http://localhost:3001/adminInbox/${orderId}`, {
+      await axios.patch(`https://json-server-8ch8.onrender.com/adminInbox/${orderId}`, {
         status,
       });
 
       const adminOrder = await axios.get(
-        `http://localhost:3001/adminInbox/${orderId}`
+        `https://json-server-8ch8.onrender.com/adminInbox/${orderId}`
       );
-      const originalOrders = await axios.get("http://localhost:3001/orders");
+      const originalOrders = await axios.get("https://json-server-8ch8.onrender.com/orders");
 
       const originalOrder = originalOrders.data.find(
         (order) =>
@@ -55,7 +55,7 @@ const OrderPage = () => {
       );
 
       if (originalOrder) {
-        await axios.patch(`http://localhost:3001/orders/${originalOrder.id}`, {
+        await axios.patch(`https://json-server-8ch8.onrender.com/orders/${originalOrder.id}`, {
           status,
         });
       }
